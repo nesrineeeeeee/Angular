@@ -1,0 +1,42 @@
+/* ===== HOME PAGE ===== */
+
+.jumbotron {
+  background: white;
+  padding: 4rem 3rem;
+  margin: 4rem auto;
+  max-width: 800px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.display-4 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.jumbotron p {
+  color: #4b5563;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}

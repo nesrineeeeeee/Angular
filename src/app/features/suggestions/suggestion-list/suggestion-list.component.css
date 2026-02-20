@@ -1,0 +1,172 @@
+/* ============================= */
+/* CONTAINER */
+/* ============================= */
+
+.container {
+  padding: 3rem 1rem;
+  max-width: 1200px;
+}
+
+/* ============================= */
+/* TITRES */
+/* ============================= */
+
+h2 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background-color: #2563eb;
+  display: block;
+  margin-top: 8px;
+  border-radius: 3px;
+}
+
+/* ============================= */
+/* SEARCH INPUT */
+/* ============================= */
+
+.form-control {
+  border-radius: 50px;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ============================= */
+/* CARDS */
+/* ============================= */
+
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.8rem;
+}
+
+.card-text {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* ============================= */
+/* STATUS COLORS */
+/* ============================= */
+
+.text-success {
+  font-weight: 600;
+}
+
+.text-danger {
+  font-weight: 600;
+}
+
+.text-warning {
+  font-weight: 600;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
+.btn {
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+  transform: scale(1.05);
+}
+
+.btn-success {
+  background-color: #16a34a;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #15803d;
+  transform: scale(1.05);
+}
+
+.btn-info {
+  background-color: #0ea5e9;
+  border: none;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #0284c7;
+  transform: scale(1.05);
+}
+
+/* ============================= */
+/* FAVORITES SECTION */
+/* ============================= */
+
+.list-group-item {
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+  transform: translateX(5px);
+  background-color: #f9fafb;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  h2::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

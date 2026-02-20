@@ -1,0 +1,48 @@
+/* ===== HEADER ===== */
+
+.navbar {
+  background: linear-gradient(90deg, #1f2937, #111827);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.8rem 1.5rem;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #38bdf8 !important;
+}
+
+.nav-link {
+  font-weight: 500;
+  margin-left: 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #38bdf8 !important;
+}
+
+.nav-link.active {
+  color: #38bdf8 !important;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background-color: #38bdf8;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
