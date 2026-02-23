@@ -1,26 +1,80 @@
-/* ===== FOOTER ===== */
+/* src/app/core/footer/footer.component.css */
 
+/* FOOTER BASE */
 .footer {
-  background: #111827;
-  color: #d1d5db;
-  padding: 1.5rem 0;
-  text-align: center;
-  margin-top: 4rem;
+  background-color: #111827;
+  color: #e5e7eb;
+  padding: 3rem 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-top: 4px solid #2563eb;
 }
 
-.footer p {
-  margin: 0.3rem 0;
-  font-size: 0.9rem;
+/* FOOTER CONTAINER */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.footer a {
-  color: #38bdf8;
+/* FOOTER BRAND */
+.footer-brand h4 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* FOOTER LINKS */
+.footer-links h5 {
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+  color: #9ca3af;
   text-decoration: none;
-  font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.footer a:hover {
-  color: #0ea5e9;
-  text-decoration: underline;
+.footer-links ul li a:hover {
+  color: #2563eb;
+}
+
+/* FOOTER DEVELOPER */
+.footer-dev h5 {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #ffffff;
+}
+
+.footer-dev p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
 }

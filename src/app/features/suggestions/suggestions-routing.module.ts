@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SuggestionListComponent } from './suggestion-list/suggestion-list.component';
 import { SuggestionDetailsComponent } from './suggestion-details/suggestion-details.component';
+import { SuggestionFormComponent } from './suggestion-form/suggestion-form.component'; // AJOUTER
 
 const routes: Routes = [
   { path: '', component: SuggestionListComponent },
+  { path: 'new', component: SuggestionFormComponent }, 
   { path: ':id', component: SuggestionDetailsComponent }
 ];
 

@@ -1,8 +1,11 @@
-<!-- src/app/features/suggestions/suggestion-list/suggestion-list.component.html -->
 <div class="container">
-  <h2>Liste des suggestions</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Liste des suggestions</h2>
+    <button class="btn btn-success" routerLink="/suggestions/new">
+      <i class="fas fa-plus"></i> Ajouter une suggestion
+    </button>
+  </div>
 
-  <!-- Two-way binding -->
   <div class="row mb-3">
     <div class="col-md-6">
       <input
@@ -16,16 +19,12 @@
 
   <hr />
 
-  <!-- NgFor -->
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let s of filterSuggestions()">
       <div class="card">
         <div class="card-body">
-          <!-- Interpolation -->
           <h5 class="card-title">{{ s.title }}</h5>
           <p class="card-text">{{ s.description }}</p>
-
-          <!-- Property binding -->
           <p><strong>Catégorie :</strong> {{ s.category }}</p>
           <p><strong>Date :</strong> {{ s.date | date:'dd/MM/yyyy' }}</p>
           <p><strong>Status :</strong> 
@@ -36,17 +35,11 @@
             </span>
           </p>
           <p><strong>Likes :</strong> {{ s.nbLikes }}</p>
-
-          <!-- NgIf -->
           <div *ngIf="s.status !== 'refusee'">
-            <!-- Event binding -->
             <button class="btn btn-primary me-2" (click)="likeSuggestion(s)">👍 Like</button>
             <button class="btn btn-success me-2" (click)="addToFavorites(s)">⭐ Ajouter aux favoris</button>
-            <!-- AJOUT : Bouton Détails avec routerLink -->
             <button class="btn btn-info" [routerLink]="['/suggestions', s.id]">🔍 Détails</button>
           </div>
-
-          <!-- Message si refusée -->
           <div *ngIf="s.status === 'refusee'" class="text-muted">
             <small>Cette suggestion a été refusée</small>
           </div>
