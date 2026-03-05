@@ -1,67 +1,73 @@
 // src/app/features/suggestions/suggestion-list/suggestion-list.component.ts
-import { Component } from '@angular/core';
-import { Suggestion } from '../../../models/suggestion';  // CHEMIN MODIFIÉ (ajoutez un ../)
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Suggestion } from '../../../models/suggestion';
+import { SuggestionService } from '../../../core/services/suggestion.service';
 
 @Component({
-  selector: 'app-suggestion-list',  // NOM MODIFIÉ (au lieu de app-list-suggestion)
-  templateUrl: './suggestion-list.component.html',  // CHEMIN MODIFIÉ
+  selector: 'app-suggestion-list',
+  templateUrl: './suggestion-list.component.html',
   styleUrls: ['./suggestion-list.component.css']
 })
-export class SuggestionListComponent {  // NOM DE LA CLASSE MODIFIÉ
-
-  searchText: string = '';
+export class SuggestionListComponent implements OnInit {
+  suggestions: Suggestion[] = [];
   favorites: Suggestion[] = [];
+  searchText: string = '';
 
-  suggestions: Suggestion[] = [
-    {
-      id: 1,
-      title: 'Organiser une journée team building',
-      description: 'Suggestion pour organiser une journée de team building pour renforcer les liens entre les membres de l\'équipe.',
-      category: 'Événements',
-      date: new Date('2025-01-20'),
-      status: 'acceptee',
-      nbLikes: 10
-    },
-    {
-      id: 2,
-      title: 'Améliorer le système de réservation',
-      description: 'Proposition pour améliorer la gestion des réservations en ligne avec un système de confirmation automatique.',
-      category: 'Technologie',
-      date: new Date('2025-01-15'),
-      status: 'refusee',
-      nbLikes: 0
-    },
-    {
-      id: 3,
-      title: 'Créer un système de récompenses',
-      description: 'Mise en place d\'un programme de récompenses pour motiver les employés et reconnaître leurs efforts.',
-      category: 'Ressources Humaines',
-      date: new Date('2025-01-25'),
-      status: 'refusee',
-      nbLikes: 0
-    },
-    {
-      id: 4,
-      title: 'Moderniser l\'interface utilisateur',
-      description: 'Refonte complète de l\'interface utilisateur pour une meilleure expérience utilisateur.',
-      category: 'Technologie',
-      date: new Date('2025-01-30'),
-      status: 'en_attente',
-      nbLikes: 0
-    }
-  ];
+  constructor(
+    private suggestionService: SuggestionService,
+    private router: Router
+  ) { }
 
-  likeSuggestion(s: Suggestion) {
-    s.nbLikes++;
+  ngOnInit(): void {
+    this.loadSuggestions();
   }
 
-  addToFavorites(s: Suggestion) {
+  loadSuggestions(): void {
+    this.suggestionService.getSuggestionsList().subscribe({
+      next: (data) => {
+        this.suggestions = data;
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des suggestions', error);
+      }
+    });
+  }
+
+  likeSuggestion(s: Suggestion): void {
+    const newLikes = s.nbLikes + 1;
+    this.suggestionService.updateLikes(s.id, newLikes).subscribe({
+      next: (updatedSuggestion) => {
+        s.nbLikes = updatedSuggestion.nbLikes;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la mise à jour des likes', error);
+      }
+    });
+  }
+
+  addToFavorites(s: Suggestion): void {
     if (!this.favorites.includes(s)) {
       this.favorites.push(s);
+      alert('Suggestion ajoutée aux favoris !');
     }
   }
 
-  filterSuggestions() {
+  deleteSuggestion(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette suggestion ?')) {
+      this.suggestionService.deleteSuggestion(id).subscribe({
+        next: () => {
+          this.loadSuggestions();
+          alert('Suggestion supprimée avec succès');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression', error);
+        }
+      });
+    }
+  }
+
+  filterSuggestions(): Suggestion[] {
     return this.suggestions.filter(s =>
       s.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
       s.category.toLowerCase().includes(this.searchText.toLowerCase())

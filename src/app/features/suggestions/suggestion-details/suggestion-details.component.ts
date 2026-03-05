@@ -1,7 +1,8 @@
-// features/suggestions/suggestion-details/suggestion-details.component.ts
+// src/app/features/suggestions/suggestion-details/suggestion-details.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Suggestion } from '../../../models/suggestion';
+import { SuggestionService } from '../../../core/services/suggestion.service';
 
 @Component({
   selector: 'app-suggestion-details',
@@ -10,27 +11,40 @@ import { Suggestion } from '../../../models/suggestion';
 })
 export class SuggestionDetailsComponent implements OnInit {
   suggestion: Suggestion | undefined;
-  
-  // Données simulées (à remplacer par un service plus tard)
-  suggestions: Suggestion[] = [
-    { id: 1, title: 'Organiser une journée team building', description: 'Suggestion pour organiser une journée de team building pour renforcer les liens entre les membres de l\'équipe.', category: 'Événements', date: new Date('2025-01-20'), status: 'acceptée', nbLikes: 10 },
-    { id: 2, title: 'Améliorer le système de réservation', description: 'Proposition pour améliorer la gestion des réservations en ligne avec un système de confirmation automatique.', category: 'Technologie', date: new Date('2025-01-15'), status: 'refuse', nbLikes: 0 },
-    { id: 3, title: 'Créer un système de récompenses', description: 'Mise en place d\'un programme de récompenses pour motiver les employés et reconnaître leurs efforts.', category: 'Ressources Humaines', date: new Date('2025-01-25'), status: 'refuse', nbLikes: 0 },
-    { id: 4, title: 'Moderniser l\'interface utilisateur', description: 'Refonte complète de l\'interface utilisateur pour une meilleure expérience utilisateur.', category: 'Technologie', date: new Date('2025-01-30'), status: 'en_attente', nbLikes: 0 }
-  ];
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private suggestionService: SuggestionService
   ) { }
 
   ngOnInit(): void {
-    // Récupérer l'ID depuis l'URL
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.suggestion = this.suggestions.find(s => s.id === id);
+    const id = this.route.snapshot.params['id'];
+    this.suggestionService.getSuggestionById(id).subscribe({
+      next: (data) => {
+        this.suggestion = data;
+      },
+      error: (error) => {
+        console.error('Erreur', error);
+      }
+    });
   }
 
   goBack(): void {
     this.router.navigate(['/suggestions']);
+  }
+
+  editSuggestion(): void {
+    this.router.navigate(['/suggestions/edit', this.suggestion?.id]);
+  }
+
+  deleteSuggestion(): void {
+    if (confirm('Supprimer ?')) {
+      this.suggestionService.deleteSuggestion(this.suggestion!.id).subscribe({
+        next: () => {
+          this.router.navigate(['/suggestions']);
+        }
+      });
+    }
   }
 }
